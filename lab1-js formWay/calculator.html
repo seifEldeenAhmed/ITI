@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<body>
+    <label for="number1">Enter first number:</label><br>
+    <input type="number" name="number1" id="number1"><br>
+    
+    <label for="number2">Enter second number:</label><br>
+    <input type="number" name="number2" id="number2"><br>
+    <button onclick="result()">Add numbers</button>
+
+<script>
+    function result(){
+        number1=Number(document.getElementById('number1').value);   //get the first number from user
+        number2=Number(document.getElementById('number2').value);   //get the second number from user
+        document.write("The sum of "+number1+" and "+number2+" is "+ (number1+number2));  //printing the final result on page for user
+    }
+    
+</script>
+</body>
+</html>

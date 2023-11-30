@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome User</title>
+</head>
+<body>
+    
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname" value="Ahmed"><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname" value="Ali"><br><br>
+    <label for="birthyear">Birth year:</label><br>
+    <input type="number" id="birthYear" name="birthyear" ><br><br>
+    <button onclick="welcomeUser()"> tmam </button>
+
+    <p id="welcomeMessage"></p>
+
+    <script>
+        function welcomeUser(){
+            let fname = document.getElementById('fname').value;  // get the first name from input field
+            let lname = document.getElementById('lname').value;  // get the last name from input field
+            let birthYear=document.getElementById('birthYear').value  // get the birth year from input field
+            var fullName= fname+ " "+ lname;
+            let currentYear = new Date().getFullYear();
+            
+            let age= Number(currentYear-birthYear);
+            confirmation= confirm("Your name is "+fullName)
+            if (confirmation){
+                document.getElementById("welcomeMessage").innerHTML = "Welcome " + fullName + ", you are " + age + " years old!";
+                console.log('welcome '+fullName);
+        } else{
+            alert ("You have not confirmed your name")
+            window.location.reload();
+        }
+    }
+
+    </script>
+</body>
+</html>
