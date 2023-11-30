@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var myClock=prompt('enter the clock in 24 hours format');
+        clock=myClock.split(':')
+        myHour=Number(clock[0]);
+        myMinute=clock[1]
+        if(myHour==0){
+            myHour=12;
+            myMinute+='AM'
+        }
+        else if(myHour>12){
+            myHour-=12;
+            myMinute+='PM';
+        }
+        else{
+            myMinute+="AM"
+        }
+        document.write("The time is "+myHour+" :"+myMinute);
+        
+    </script>
+</body>
+</html>

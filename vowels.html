@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var klma=prompt('Please enter a word');
+        var vowels =['a','e','o','u','i'];
+        var vowelsCount=0
+        for (letter of klma){
+            for (let i= 0;i<vowels.length;i++){
+                if(letter===vowels[i]){
+                    vowelsCount+=1;
+            }
+        }
+        
+    }
+    alert(`${klma} has ${vowelsCount} vowel`);
+
+    </script>
+</body>
+</html>
