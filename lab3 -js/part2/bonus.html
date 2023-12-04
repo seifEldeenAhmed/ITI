@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Area Calculator</title>
+</head>
+<body>
+    <script>
+        var side;
+        var side2;
+        var area=0;
+        var flag=true
+        while(flag){
+            var shape=prompt("please enter the shape");
+            if(!shape){
+                flag=false;
+            }
+            shape=shape.toLowerCase();
+            switch(shape){
+                case 'circle':
+                    side=prompt('enter the radius')
+                    side=Number(side)
+                    if(isNaN(side)){
+                        alert('invalid entery')
+                    }
+                    area=Math.PI*Math.pow(side,2)
+                    alert(`the are is ${area.toFixed(2)} unit squares`)
+                    break;
+                case 'triangle':
+                    side=prompt('please enter the base length');
+                    side2=prompt('please enter the height length');
+                    side=Number(side);
+                    side2=Number(side2);
+                    if(isNaN(side)||isNaN(side2)){
+                        alert('invalid entery')
+                    }
+                    area=0.5*side*side2;
+                    alert(`the are is ${area} unit squares`)
+                    break;
+                case 'square':
+                    side=prompt('enter the side length');
+                    side=Number(side);
+                    if(isNaN(side)){
+                        alert('invalid entery')
+                    }
+                    area=Math.pow(side,2)
+                    alert(`the are is ${area} unit squares`)
+                    break;
+                case 'rectangle':
+                    side=prompt('please enter the length');
+                    side2=prompt('please enter the width')
+                    side=Number(side);
+                    side2=Number(side2);
+                    if(isNaN(side)||isNaN(side2)){
+                        alert('invalid entery')
+                    }
+                    area=side*side2;
+                    alert(`the are is ${area} unit squares`)
+                    break;
+                case 'parellogram':
+                    side=prompt('please enter the base');
+                    side2=prompt('please enter the vertical height')
+                    side=Number(side);
+                    side2=Number(side2);
+                    if(isNaN(side)||isNaN(side2)){
+                        alert('invalid entery')
+                    }
+                    area=side*side2;
+                    break;
+                case 'trapezium':
+                    side=prompt('please enter the length of base 1');
+                    side2=prompt('please enter the length of base 2');
+                    let side3=prompt('please enter the length of the trap height');
+                    side=Number(side);
+                    side2=Number(side2);
+                    side3=Number(side3);
+                    if(isNaN(side)||isNaN(side2)||isNaN(side3)){
+                        alert('invalid entery')
+                    }
+                    area=0.5*(side+side2)*side3;
+                    alert(`the are is ${area} unit squares`)
+                    break;
+                case 'ellipse':
+                    side=prompt('please enter the minor axis half length');
+                    side2=prompt('please enter the major axis half length')
+                    side=Number(side);
+                    side2=Number(side2);
+                    if(isNaN(side)||isNaN(side2)){
+                        alert('invalid entery')
+                    }
+                    area=side*side2*Math.PI;
+                    alert(`the are is ${area.toFixed(2)} unit squares`)
+                    break;
+                default:
+                    alert('enter valid shape name');
+                    window.location.reload();
+            }
+            }
+        
+    </script>
+</body>
+</html>

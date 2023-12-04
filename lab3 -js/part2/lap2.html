@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+<body>
+    <script>
+        var flag=true;
+        var contactList=new Array();
+        while(flag){
+            var operation=prompt('Enter add if you want to add or search');
+            if (!operation){
+                flag=false;
+            }
+            switch(operation){
+                case 'add':
+                    let contactName=prompt('enter the contact name');
+                    let contactNumber=prompt('enter the contact number');
+                    var contact={'name':contactName,
+                                'number':contactNumber}
+                    contactList.push(contact);
+                    break;
+                case 'search':
+                    let command=prompt('enter your search key')
+                    if(command=='name'){
+                        let searchName=prompt('enter the name of search')
+                        for (member in contactList){
+                            if(contactList[member]['name']==searchName){
+                                alert(`the contact name is ${contactList[member]['name']}`+` `+`and his number is${contactList[member]['number']} `)
+                            }
+                            
+                        }
+                        alert('this member is not found')
+                    }
+                    else if(command=='phone'){
+                        let searchPhone=prompt('enter the phone of search')
+                        for (member in contactList){
+                            if(contactList[member]['phone']==searchPhone){
+                                alert(`the contact name is ${contactList[member]['name']}`+` `+`and his number is${contactList[member]['number']} `)
+                            }
+                            
+                        }
+                        alert('this member is not found')
+                    }
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

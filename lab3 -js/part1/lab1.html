@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        userName=prompt('Please enter your username');
+        password=prompt('Please enter your password');
+        login(userName,password);
+        
+        function login(username,password){
+            if(username==='admin'&&password==='421$$'){
+                document.write('Hello, Admin');
+            }
+            else if(username=='admin'&&password!='421$$'){
+                document.write('wrong password')
+            }
+            else if(username!='admin'&&password=='421$$'){
+                document.write('wrong username')
+            }
+            else{
+                alert('both credentials are wrong');
+            }
+        }
+
+    </script>
+</body>
+</html>

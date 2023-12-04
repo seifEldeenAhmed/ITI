@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var flag= true;
+        var result=0;
+        var number1=prompt('enter the first number');//taking first input from user
+            if (number1=='='){
+                document.write(result);
+            }
+            number1=Number(number1);
+            result=number1;
+        while (flag){
+            
+            let operation=prompt('enter the operation as sign eg:+, -, / ');//taking the operation
+            if (operation!='='){
+                var number2=prompt('enter the second number');//taking second number from user
+                number2=Number(number2);
+            }
+            
+            switch(operation){
+                case'+':
+                    result+=number2;
+                    break;
+                case '-':
+                    result-=number2
+                    break;
+                case '*':
+                    result*=number2
+                    break;
+                case '/':
+                    result/=number2
+                    break;
+                case'%':
+                    result%=number2
+                    break;
+                case'=':
+                    document.write(`result is ${result}`)
+                    flag=false;
+                    break;
+                default:
+                    alert('enter valid entry');
+                    operation=prompt('enter the valid operation sign')
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

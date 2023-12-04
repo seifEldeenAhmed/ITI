@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var length=prompt('please enter the length of the array');
+        var arr =new Array();
+        var sum=0;
+        let avg=0;
+        for(let i=0;i<length;i++){
+            let number=prompt('enter the number you want')
+            number=Number(number);
+            sum+=number;
+            arr.push(number);
+        }
+        document.write(`the sum is ${sum} , the average is ${sum/length}`)
+
+    </script>
+</body>
+</html>
