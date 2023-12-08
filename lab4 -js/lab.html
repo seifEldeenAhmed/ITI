@@ -1,0 +1,188 @@
+<script>
+//     //1-using constructor function
+//____________________________________________________________
+//     function Human(fullname, money, sleepmode, healthrate){
+//         //setting the attributes
+//         this.fullname=fullname;
+//         this.money=money;
+//         this.sleepmode=sleepmode;
+//         this.healthrate=healthrate;
+
+
+//         //defining the methods
+// 
+//         //sleep method 
+//         this.sleep=function(hours){
+//             if(hours<7){
+//                 console.log(`${this.fullname} is tired`)
+//             }
+//             else if(hours==7){
+//                 console.log(`${this.fullname} is happy`)
+//             }
+//             if(hours>7){
+//                 console.log(`${this.fullname} is lazy`)
+//             }
+//         }
+//         //eat method
+//         this.eat=function(meals){
+//             if(meals==1){
+//                 this.healthrate=50;
+//                 console.log(`${this.fullname} is ${this.healthrate} healthrate`)
+//             }
+//             else if(meals==3){
+//                 this.healthrate=100;
+//                 console.log(`${this.fullname} is ${this.healthrate} healthrate`)
+//             }
+//             else if(meals==2){
+//                 this.healthrate=75;
+//                 console.log(`${this.fullname} is ${this.healthrate} healthrate`)
+//             }
+//         }
+//         //buy method
+//         this.buy=function(){
+//                 this.money-=10;
+//                 console.log(`${this.fullname} is ${this.money} rich`)
+//         }
+//     }
+//     const sief=new Human('seif ahmed',2000,'kways','healthy');
+
+
+//2- using class operator
+//_____________________________________________________________________________________
+// class Human{
+//     constructor(fullname, money, sleepmode, healthrate){
+//         //setting the attributes
+//         this.fullname=fullname;
+//         this.money=money;
+//         this.sleepmode=sleepmode;
+//         this.healthrate=healthrate;
+
+//         //         //sleep method 
+//         this.sleep=function(hours){
+//             if(hours<7){
+//                 console.log(`${this.fullname} is tired`)
+//             }
+//             else if(hours==7){
+//                 console.log(`${this.fullname} is happy`)
+//             }
+//             if(hours>7){
+//                 console.log(`${this.fullname} is lazy`)
+//             }
+//         }
+//         //eat method
+//         this.eat=function(meals){
+//             if(meals==1){
+//                 this.healthrate=50;
+//                 console.log(`${this.fullname} is ${this.healthrate} healthrate`)
+//             }
+//             else if(meals==3){
+//                 this.healthrate=100;
+//                 console.log(`${this.fullname} is ${this.healthrate} healthrate`)
+//             }
+//             else if(meals==2){
+//                 this.healthrate=75;
+//                 console.log(`${this.fullname} is ${this.healthrate} healthrate`)
+//             }
+//         }
+//         //buy method
+//         this.buy=function(){
+//                 this.money-=10;
+//                 console.log(`${this.fullname} is ${this.money} rich`)
+//         }
+//     }
+// }
+// const sief=new Human('seif ahmed',2000,'kways',90);
+
+//3- using OLOO
+//__________________________________________________________________________________
+
+// const Human={
+//     init(fullname, money, sleepmode, healthrate){
+//         //setting the attributes
+//         this.fullname=fullname;
+//         this.money=money;
+//         this.sleepmode=sleepmode;
+//         this.healthrate=healthrate;
+//         //sleep method 
+//         this.sleep=function(hours){
+//             if(hours<7){
+//                 console.log(`${this.fullname} is tired`)
+//             }
+//             else if(hours==7){
+//                 console.log(`${this.fullname} is happy`)
+//             }
+//             if(hours>7){
+//                 console.log(`${this.fullname} is lazy`)
+//             }
+//         }
+//         //eat method
+//         this.eat=function(meals){
+//             if(meals==1){
+//                 this.healthrate=50;
+//                 console.log(`${this.fullname} is ${this.healthrate} healthrate`)
+//             }
+//             else if(meals==3){
+//                 this.healthrate=100;
+//                 console.log(`${this.fullname} is ${this.healthrate} healthrate`)
+//             }
+//             else if(meals==2){
+//                 this.healthrate=75;
+//                 console.log(`${this.fullname} is ${this.healthrate} healthrate`)
+//             }
+//         }
+//         //buy method
+//         this.buy=function(){
+//                 this.money-=10;
+//                 console.log(`${this.fullname} is ${this.money} rich`)
+//         }
+//         return this
+//     }
+    
+//     }
+//     const sief=Object.create(Human).init('seif ahmed',2000,'kways',90);
+
+
+//4- using factory method
+//_______________________________________________
+function Human(fullname, money, sleepmode, healthrate){
+    return{
+        fullname,
+        money,
+        sleepmode,
+        healthrate,
+        //sleep method 
+        sleep(hours){
+            if(hours<7){
+                console.log(`${fullname} is tired`)
+            }
+            else if(hours==7){
+                console.log(`${fullname} is happy`)
+            }
+            if(hours>7){
+                console.log(`${fullname} is lazy`)
+            }
+        },
+        //eat method
+        eat(meals){
+            if(meals==1){
+                healthrate=50;
+                console.log(`${fullname} is ${healthrate} healthrate`)
+            }
+            else if(meals==3){
+                healthrate=100;
+                console.log(`${fullname} is ${healthrate} healthrate`)
+            }
+            else if(meals==2){
+                healthrate=75;
+                console.log(`${fullname} is ${healthrate} healthrate`)
+            }
+        },
+        //buy method
+        buy(){
+                money-=10;
+                console.log(`${fullname} is ${money} rich`)
+        }
+    }
+    }
+    const sief=Human('seif ahmed',2000,'kways',90);
+</script>
