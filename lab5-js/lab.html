@@ -44,14 +44,25 @@
     }
 
     class Employee extends Human{
+        #salary;
         constructor(fullname, money, sleepmode, healthrate, id, email, workMood, salary, isManager){
             super(fullname, money, sleepmode, healthrate);
             this.id=id;
             this.email=email;
             this.workMood=workMood;
-            this.salary=salary>1000? salary:1000;
-            this.isManager=isManager? 'manager':'employee';
-            
+            this.isManager=isManager;
+        }
+        get salary(){
+            if (this.isManager){
+                return 'Confedential'
+            }
+            else {
+                return this.#salary
+            }
+        
+        }
+        set salary(value){
+            this.#salary=value>1000? value:1000;
         }
         work(hours){
             if(hours>8){
@@ -100,7 +111,7 @@
     }
     // Testing within the code before going to browsers console
     //
-    // const sief=new Employee('seif ahmed',2000,'kways',65, 233,'sief@g','good', 8000, false);
+    // const sief=new Employee('seif ahmed',2000,'kways',65, 233,'sief@g','good', 8000, true);
     // const ali=new Employee('ali ahmed',2000,'kways',65, 244,'ali@g','good', 8000, false);
     // const nour=new Employee('nour ahmed',2000,'kways',65, 244,'nour@g','good', 8000, false);
     // const off1=new Office('nour', [nour,sief]);
