@@ -1,0 +1,140 @@
+<script>
+    class Human{
+    constructor(fullname, money, sleepmode, healthrate){
+        //setting the attributes
+        this.fullname=fullname;
+        this.money=money;
+        this.sleepmode=sleepmode;
+        healthrate=Number(healthrate);
+        this.healthrate=healthrate<100&&healthrate>0? healthrate:100;
+        //         //sleep method 
+        this.sleep=function(hours){
+            if(hours<7){
+                console.log(`${this.fullname} is tired`)
+            }
+            else if(hours==7){
+                console.log(`${this.fullname} is happy`)
+            }
+            if(hours>7){
+                console.log(`${this.fullname} is lazy`)
+            }
+        }
+        //eat method
+        this.eat=function(meals){
+            if(meals==1){
+                this.healthrate=50;
+                console.log(`${this.fullname} is ${this.healthrate} healthrate`)
+            }
+            else if(meals==3){
+                this.healthrate=100;
+                console.log(`${this.fullname} is ${this.healthrate} healthrate`)
+            }
+            else if(meals==2){
+                this.healthrate=75;
+                console.log(`${this.fullname} is ${this.healthrate} healthrate`)
+            }
+        }
+        //buy method
+        this.buy=function(){
+                this.money-=10;
+                console.log(`${this.fullname} is ${this.money} rich`)
+        }
+        
+        }
+    }
+
+    class Employee extends Human{
+        constructor(fullname, money, sleepmode, healthrate, id, email, workMood, salary, isManager){
+            super(fullname, money, sleepmode, healthrate);
+            this.id=id;
+            this.email=email;
+            this.workMood=workMood;
+            this.salary=salary>1000? salary:1000;
+            this.isManager=isManager? 'manager':'employee';
+            
+        }
+        work(hours){
+            if(hours>8){
+                console.log(`${this.fullname} is  tired`);
+            }
+            else if(hours<8){
+                console.log(`${this.fullname} is  lazy`);
+            }
+            else if(hours==8){
+                console.log(`${this.fullname} is  happy`);
+            }
+        }
+    }
+    //Creating New office requires you to send the name of the office at least
+    // and the list of its employees
+
+    class Office {
+        constructor(name,employees=[]){
+            this.name=name;
+            this.employees=employees
+        }
+        getAllEmployees(){
+            return this.employees;
+        }
+        getEmployee(id){
+            for(const employee of this.employees){
+                if (employee['id']==id){
+                    return employee
+                }
+            }
+            console.log('this id does not exist in this office');
+        }
+        hire(employee){
+            this.employees.push(employee)
+        }
+        fire(id){
+            var counter=0 ;
+            for(const employee of this.employees){
+                if (employee['id']==id){
+                    this.employees.splice(counter,1);
+                    break;
+                }
+                counter++;
+            }
+        }
+    }
+    // Testing within the code before going to browsers console
+    //
+    // const sief=new Employee('seif ahmed',2000,'kways',65, 233,'sief@g','good', 8000, false);
+    // const ali=new Employee('ali ahmed',2000,'kways',65, 244,'ali@g','good', 8000, false);
+    // const nour=new Employee('nour ahmed',2000,'kways',65, 244,'nour@g','good', 8000, false);
+    // const off1=new Office('nour', [nour,sief]);
+
+    // Making prompt for user entries
+    var flag=true;
+    var employees=[];
+    while(flag){
+        var operation= prompt('enter your operation please');
+        if (operation=='add'){
+            var fullname=prompt('enter the employee name')
+            var money=prompt('enter the employee money')
+            var sleepmode=prompt('enter the employee sleepmode')
+            var healthrate=prompt('enter the employee healthrate')
+            var id=prompt('enter the employee id')
+            var salary=prompt('enter the employee salary')
+            var workMood=prompt('enter the employee work mood')
+            var email=prompt('enter the employee email')
+            var mangerialLevel=prompt('enter mgr if manager')
+            mangerialLevel.toLocaleLowerCase()
+            if(mangerialLevel=='mgr'){
+                mangerialLevel=true;
+            }
+            else{
+                mangerialLevel=false;
+            }
+            const newEmployee=new Employee(fullname, money, sleepmode,
+            healthrate, id, email, workMood, salary, mangerialLevel)
+            employees.push(newEmployee);
+        }
+        else if (operation=='q'){
+            flag=false;
+        }
+        
+    }
+    
+</script>
