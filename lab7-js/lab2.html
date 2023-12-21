@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="lab2 styles/lab2.css">
+    <title>Clock Alarm</title>
+</head>
+
+<body onload="updateClock()">
+
+    <body onLoad="initClock()">
+
+        <div id="timedate">
+            <a id="day">January</a>
+            <a id="d">1</a>/
+            <a id="mon">1</a>/
+            <a id="y">0</a><br />
+            <a id="h">12</a> :
+            <a id="m">00</a>:
+            <a id="s">00</a>
+            
+        </div>
+        <div class="form">
+            <h3>Set Alarm After</h3><br>
+            <div class="container">
+                <label for="Hours">Hours</label>
+                <input id="hours" type="number" placeholder="00">
+            </div>
+            <div class="container">
+                <label for="Minutes">Minutes</label>
+                <input id="minutes" type="number" placeholder="00">
+            </div>
+            <div class="container">
+                <label for="Seconds">Seconds</label>
+                <input id="seconds" type="number" placeholder="00">
+            </div>
+            <div class="container">
+                <button class="set" onclick="setAlarm(document.getElementById('hours').value,
+                document.getElementById('minutes').value,
+                document.getElementById('seconds').value)" class="alarm">Set</button>
+                <button class="clear" onclick="window.location.reload()">Reset</button>
+            </div>
+        </div>
+        <script>
+            var alarmTime;
+            function updateClock() {
+                var now = new Date;
+                day = now.getDay();
+                sec = now.getSeconds(),
+                    min = now.getMinutes(),
+                    hou = now.getHours(),
+                    mo = now.getMonth(),
+                    dy = now.getDate(),
+                    yr = now.getFullYear();
+                var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+                var tags = ["day", "d", 'mon', "y", "h", "m", "s"]
+                corr = [days[day], dy, mo+1, yr, hou, min, sec];
+                for (var i = 0; i < tags.length; i++) {
+                    document.getElementById(tags[i]).firstChild.nodeValue = corr[i];
+                }
+                setInterval(updateClock, 1000);
+                
+            }
+            function initClock() {
+                updateClock();
+                window.setInterval("updateClock()", 1000);
+            }
+            // this is one way to set alarm by setting a number of milliseconds added to the current get time function and check until the value of current time and the alarm meets
+            // i dont recommend this way because you overwhelm your cpu with the infinite loop till it meets the condition using the ringbell function
+            // another way to do it is to set a timeout for the alert just simple as that
+
+            function setAlarm(h, m, s){
+                var now=new Date
+                s=Number(s)*1000;
+                m=Number(m)*60*1000;
+                h=Number(h)*60*60*1000;
+                // alarmTime=now.getTime()+s+m+h
+                // ringBell()
+                setTimeout(()=>{
+                    alert('Wake up time for work <3')
+                },s+m+h)
+            }
+            // function ringBell(){
+            //     while(alarmTime){
+            //         now=new Date
+            //         if (now.getTime()==alarmTime){
+            //             alert('Wake up Time for Work <3');
+            //             alarmTime=0;
+            //     }
+            // }
+            // }
+            
+            
+        </script>
+    </body>
+
+</html>

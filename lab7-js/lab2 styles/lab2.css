@@ -1,0 +1,101 @@
+body {
+    background-color: #2d2d2d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#timedate {
+    font: small-caps lighter 43px/150% "Segoe UI", 'Frutiger', "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    text-align: left;
+    width: 50%;
+    margin: 40px auto;
+    color: #fff;
+    border-left: 3px solid #ed1f24;
+    padding: 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.form h3 {
+    display: block;
+    font: small-caps lighter 43px/150% "Segoe UI", 'Frutiger', "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    color: #fff;
+}
+
+.form .container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 200px;
+    margin: 8px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    border-left: 3px solid #ed1f24;
+}
+
+.form .container label {
+    font: small-caps lighter 43px/150% "Segoe UI", 'Frutiger', "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    color: #fff;
+}
+
+.form .container input {
+    border: none;
+    appearance: none;
+    background: #f2f2f2;
+    border-radius: 3px;
+    width: 250px;
+    outline: none;
+    font-size: 14px;
+    height: 100px;
+    width: 100px;
+}
+
+input[type="number"]::placeholder {
+    color: gray;
+    font: small-caps lighter 43px/150% "Segoe UI", 'Frutiger', "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 20px;
+    text-align: center;
+}
+
+
+
+    button {
+        
+            display: inline-block;
+            background-color: #7b38d8;
+            padding: 20px;
+            width: 200px;
+            color: #ffffff;
+            text-align: center;
+            border: 4px double #cccccc; 
+            border-radius: 10px; 
+            font-size: 24px;
+            margin: 6px;
+        }
+
+button:hover {
+    border-color: #dadce0;
+    box-shadow: rgba(0, 0, 0, .1) 0 1px 1px;
+    color: #202124;
+}
+
+button:focus {
+    border-color: #4285f4;
+    outline: none;
+}
+.set{
+    background-color: #60bddb;
+}
+.clear{
+    background-color: #f2b6c4;
+}
