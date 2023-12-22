@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Preview</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <p>
+        Display users data (image, email) in html page,
+        you should fetch the data from this
+        url https://reqres.in/api/users?page=2
+        the data should be fetched on page load
+        <button onclick="prevObj()">Click me</button>
+    </p>
+    <table id="object-table"></table>
+    <script>
+        var response
+        const arr = new Array
+        const obj = {
+            'email': '',
+            'avatar': ''
+        }
+        function myReq() {
+
+            const req = new XMLHttpRequest
+            req.open('GET', 'https://reqres.in/api/users?page=2')
+            req.send();
+            req.onload = function () {
+                //Extracting the required data
+                // email=textract(this.responseText.split('email":"')[1])
+                // document.getElementById('res').innerHTML=email
+                // document.getElementById('res').innerHTML=this.responseText.split('avatar":"')[1]
+                // document.getElementById('res').innerHTML=this.responseText
+                response = this.responseText
+                for (let i = 1; i < response.split('email":"').length; i++) {
+                    var email = textract(this.responseText.split('email":"')[i])
+                    var avatar = textract(this.responseText.split('avatar":"')[i])
+                    var newObj = Object.create(obj);
+                    newObj.email = email;
+                    newObj.avatar = avatar;
+                    arr.push(newObj);
+                }
+            }
+        }
+        myReq();
+        //helper function to get me the string of the email and avatar without the "" 
+        function textract(string) {
+            let i = 0;
+            let extractedWord = ''
+            let char;
+            while (1) {
+                char = string[i]
+                if (char === '"') {
+                    break
+                }
+                extractedWord += char
+                i++;
+            }
+            return extractedWord
+        }
+
+        function prevObj() {
+            let tableElement = document.getElementById('object-table');
+
+            for (let i = 0; i < arr.length; i++) {
+                let object = arr[i];
+                let row = document.createElement('tr');
+
+                let key1Cell = document.createElement('td');
+                key1Cell.textContent = object.email;
+                row.appendChild(key1Cell);
+
+                let key2Cell = document.createElement('td');
+                key2Cell.textContent = object.avatar;
+                row.appendChild(key2Cell);
+
+                tableElement.appendChild(row);
+            }
+        }
+    </script>
+</body>
+
+</html>
