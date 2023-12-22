@@ -41,6 +41,7 @@
             </div>
             <div class="card-footer text-muted">
                 <p>Not registered? <a href="#">Create Account now</a></p>
+                <p>Thanks for guiding us :) </p>
             </div>
         </div>
     </div>
@@ -50,15 +51,30 @@
         var node=document.getElementById('card')
         const para = document.createElement("p");
         function auth(username,password){
-            para.innerHTML=''
-            if(username=='admin'&& password=='123'){
-                const success = document.createTextNode("logged in successfully");    
+            para.innerHTML='';
+            let myregex=/(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}/
+            if(myregex.test(password)){
+                if(username=='admin'){
+                const success = document.createTextNode("logged in successfully");
                 para.appendChild(success);
             }
-            else{
-                const fail=document.createTextNode('not registered')
-                para.appendChild(fail);
+                else{
+                    const fail=document.createTextNode('not registered')
+                    para.appendChild(fail);
+                }
             }
+            else{
+                if(!password.match(/(?=.*[a-z])/)){
+                    alert('password has to have small char')
+                }
+                if(!password.match(/(?=.*[A-Z])/)){
+                    alert('password has to have capital char')
+                }
+                if(!password.match(/(?=.*[0-9])/)){
+                    alert('password has to have number')
+                }
+            }
+            
             node.appendChild(para);
         }
     </script>

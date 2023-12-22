@@ -1,74 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Todo list</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<body class="d-flex flex-column justify-content-center align-content-center bg-primary" style="height: 100vh;">
+
+<body onload="localStorageTracker()" class="d-flex flex-column justify-content-center align-content-center bg-primary"
+    style="height: 100vh;">
     <div class="container card w-50">
         <ul class="list-group" id="task-list">
         </ul>
         <div class="form-group justify-content-center align-items-center ">
             <label for="Task">Task</label>
             <input type="text" class="form-control" id="task" placeholder="Task name">
-            <div class="text-center "> 
+            <div class="text-center ">
                 <button onclick="addTask()" class="btn btn-primary btn-add " style="width: 120px;">Add</button>
             </div>
-            
+
         </div>
     </div>
 
     <script>
-        function addTask(){
-            if (document.getElementById('task').value.length==0){
+        function addTask() {
+            if (document.getElementById('task').value.length == 0) {
                 alert('please enter the task description')
             }
-            else{
+            else {
                 //getting the element from DOM
-            var task= document.getElementById('task')
-            var taskValue=task.value
+                var task = document.getElementById('task')
+                var taskValue = task.value
+                localStorage.setItem(`${taskValue}`, `${taskValue}`);
+                appendTask(localStorage.getItem(`${taskValue}`));
+            }
 
+        }
+        function appendTask(taskvalue) {
             // Creating new list item to add to tasks list
-            var li=document.createElement('li');
-            li.className='list-group-item d-flex justify-content-between align-items-center';
+            var li = document.createElement('li');
+            li.className = 'list-group-item d-flex justify-content-between align-items-center';
 
             // appending the task text to a text node
-            var newTask=document.createTextNode(taskValue)
+            var newTask = document.createTextNode(taskvalue)
             li.appendChild(newTask)
             //creating the done (check) button
-            var done=document.createElement('button');
-            done.id='done'
-            done.className='btn btn-success done'
+            var done = document.createElement('button');
+            done.id = 'done'
+            done.className = 'btn btn-success done'
             done.innerHTML = 'Done';
 
             //creating the cancel (delete) button
-            var cancel=document.createElement('button');
-            cancel.id='cancel'
-            cancel.className='btn btn-danger cancel'
+            var cancel = document.createElement('button');
+            cancel.id = 'cancel'
+            cancel.className = 'btn btn-danger cancel'
             cancel.innerHTML = 'Cancel';
-            
+
             li.appendChild(done)
             li.appendChild(cancel)
-            li.className="list-group-item d-flex justify-content-between align-items-center"
+            li.className = "list-group-item d-flex justify-content-between align-items-center"
             document.getElementById('task-list').appendChild(li)
-            task.value='';
-            
+            task.value = '';
             var to_be_cancelled_tasks = document.querySelectorAll(".cancel");
-            for(let i=0;i<to_be_cancelled_tasks.length;i++){
-                to_be_cancelled_tasks[i].onclick=function(){
-                this.parentNode.remove();
+            for (let i = 0; i < to_be_cancelled_tasks.length; i++) {
+                to_be_cancelled_tasks[i].onclick = function () {
+                    localStorage.removeItem(`${this.parentNode.innerHTML.split('<')[0]}`)
+                    this.parentNode.remove();
                 }
             }
-            var done_tasks=document.querySelectorAll('.done')
-            for(let i=0;i<done_tasks.length;i++){
-                done_tasks[i].onclick=function(){
-                this.parentNode.style.backgroundColor = 'rgb(179, 255, 179)';
+            var done_tasks = document.querySelectorAll('.done')
+            for (let i = 0; i < done_tasks.length; i++) {
+                done_tasks[i].onclick = function () {
+                    this.parentNode.style.backgroundColor = 'rgb(179, 255, 179)';
                 }
             }
 
+        }
+        function localStorageTracker() {
+            let i = 0;
+            for (let task in localStorage) {
+                if (i < localStorage.length) {
+                    appendTask(localStorage[`${task}`])
+                    i++;
+                }
+                else {
+                    break;
+                }
             }
         }
-        
+
     </script>
 </body>
+
 </html>
