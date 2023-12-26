@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Preview</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <p>
+        Display users data (image, email) in html page,
+        you should fetch the data from this
+        url https://reqres.in/api/users?page=2
+        the data should be fetched on page load
+        <button onclick="prevObj()">Click me</button>
+    </p>
+    <table id="object-table"></table>
+    <script>
+        var response
+        const arr = new Array
+        const obj = {
+            'email': '',
+            'avatar': ''
+        }
+        fetch('https://reqres.in/api/users?page=2').then(
+            x=>x.json()
+        )
+        .then((jsonx)=>{
+            for(var element in jsonx.data){
+                var newObj=Object.create(obj)
+                newObj.email=jsonx.data[element]['email']
+                newObj.avatar=jsonx.data[element]['avatar']
+                arr.push(newObj)
+
+            }
+        } )
+
+        function prevObj() {
+            let tableElement = document.getElementById('object-table');
+
+            for (let i = 0; i < arr.length; i++) {
+                let object = arr[i];
+                let row = document.createElement('tr');
+
+                let key1Cell = document.createElement('td');
+                key1Cell.textContent = object.email;
+                row.appendChild(key1Cell);
+
+                let key2Cell = document.createElement('td');
+                key2Cell.textContent = object.avatar;
+                row.appendChild(key2Cell);
+
+                tableElement.appendChild(row);
+            }
+        }
+    </script>
+</body>
+
+</html>
