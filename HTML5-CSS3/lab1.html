@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab1</title>
+</head>
+
+<body>
+    <div style="text-align: center;display: flex;flex-direction: column;">
+        <div style="display: flex;justify-content: center; align-items: center;flex-direction: column; ">
+            <video id="video" width="400" height="250" src="videos/despair.mp4">
+            </video>
+            <progress id="seekBar" min="0" max="100" value="0" style="width: 400px;"></progress>
+            <span id="timer"></span>
+        </div>
+        <div>
+            <p style="color: brown;">It's recommended to lower the volume bar before playing any of the videos 
+                Stay Safe !.
+            </p>
+        <button onclick="playPrev()"> << </button>
+        <button onclick="togglePause()">Pause/Play</button>
+        <button onclick="back5()">5sec back</button>
+        <button onclick="jump5()">5sec fwd</button>
+        <button onclick="playNext()">>></button>
+        <label for="Volume">Volume</label>
+        <input type="range" min="0" max="100" step="1" value="100" onchange="setVol(this.value)">
+        <button onclick="toggleMute()">Mute</button>
+        <button onclick="fullScreen()" >Full Screen</button>
+    </div>
+        
+    </div>
+
+    <script>
+        let vid = document.getElementById('video')
+        let vidVol=vid.volume
+        let seekBar=document.getElementById('seekBar');
+        let srcArray = ['videos/despair.mp4', 'videos/vct.mp4', 'videos/valorant.mp4']
+        let currentVid= 0
+            function playPrev() {
+                currentVid = (currentVid - 1 + srcArray.length) % srcArray.length;
+                vid.src = srcArray[currentVid];
+            }
+        function playNext(){
+            currentVid = (currentVid +1) % srcArray.length;
+            vid.src = srcArray[currentVid];
+        }
+        function togglePause(){
+            if(vid.paused){
+                vid.play();
+            }
+            else{
+                vid.pause();
+            }
+        }
+        function toggleMute(){
+            if(vid.muted){
+                vid.muted=false;
+            }
+            else{
+                vid.muted=true;
+            }
+        }
+        function setVol(vol){
+            vid.volume=Number(vol)/100;
+        }
+        vid.addEventListener('loadedmetadata', function() {
+            let vidLength = vid.duration
+            seekBar.max=vidLength;
+            
+        })
+        vid.addEventListener('timeupdate', function() {
+            let vidLength = vid.duration
+            seekBar.value=vid.currentTime;
+            var minutes = Math.floor((video.currentTime % 3600) / 60);
+            var seconds = Math.floor(video.currentTime % 60);
+            var formattedTime =(minutes < 10 ? '0' : '') + minutes + ':' +
+                        (seconds < 10 ? '0' : '') + seconds;
+        document.getElementById("timer").innerHTML = formattedTime;
+            
+        })
+        function jump5(){
+            if(Number(seekBar.value)+5>seekBar.max){
+                alert('cant fast forward 5sec')
+            }
+            else{
+                vid.currentTime=Number(vid.currentTime)+5
+            }
+            
+        }
+        function back5(){
+            if(Number(vid.currentTime)-5<seekBar.min){
+                alert('cant back 5sec')
+            }
+            else{
+                vid.currentTime=Number(vid.currentTime)-5
+            }
+            
+        }
+        function fullScreen(){
+            if (vid.requestFullscreen) {
+                vid.requestFullscreen();
+                vid.controls=false
+        }
+        };
+
+    </script>
+</body>
+
+</html>

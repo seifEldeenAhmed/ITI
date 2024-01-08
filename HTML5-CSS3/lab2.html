@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Pallet</title>
+</head>
+
+<body>
+    <div style="display: flex; flex-direction: column; justify-content: left; align-items: top; width: 300px;">
+        <label for="Red">Red</label>
+        <input id="red" type="range" min="0" max="255" step="1" value="0" onchange="setVal(this.value)">
+        <label for="Green">Green</label>
+        <input id="green" type="range" min="0" max="255" step="1" value="0" onchange="setVal(this.value)">
+        <label for="Blue">Blue</label>
+        <input id="blue" type="range" min="0" max="255" step="1" value="0" onchange="setVal(this.value)">
+
+        <p id="par" style="font-size: 20px;">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat deleniti delectus, laboriosam magnam eveniet perspiciatis!
+        </p>
+    </div>
+    <hr>
+    <div style="display: flex;flex-direction: row; align-items: center;justify-content: center; ">
+        <svg style="height: 700px; width: 700px;border: 3px solid;">
+            <text x="520" y="350" class="small">X</text>
+            <text x="400" y="540" class="heavy">Y</text>
+            <text x="340" y="280" class="small">Z</text>
+            <polygon id="pol" points="500,500 500,100 200,500" style="fill:red;stroke:purple;stroke-width:1">
+            </polygon>
+        </svg>
+        <math display="block" style="font-size: larger; margin-left: 5px; padding-left: 8px;">
+            <mi>z</mi>
+            <mo>=</mo>
+            <msqrt>
+                <mrow>
+                    <msup>
+                        <mi>X</mi>
+                        <mn>2</mn>
+                    </msup>
+                    
+                    <mo>+</mo>
+                    <msup>
+                        <mi>Y</mi>
+                        <mn>2</mn>
+                    </msup>
+                </mrow>
+            </msqrt>
+        </math>
+    </div>
+    
+<hr>
+    <canvas id="myCanvas" width="400" height="400" style="border:2px solid rgb(0, 0, 0)"></canvas>
+    
+
+    <script>
+        function setVal(x){
+            let p=document.getElementById('par');
+            let pol=document.getElementById('pol');
+            let red=document.getElementById('red');
+            let green=document.getElementById('green');
+            let blue=document.getElementById('blue');
+            p.style.color=`rgb(${red.value},${green.value},${blue.value})`
+            pol.style.fill=`rgb(${red.value},${green.value},${blue.value})`
+        }
+
+        let can=document.getElementById('myCanvas');
+        let ctx=can.getContext("2d");
+        let x=10;
+        let y=10;
+        ctx.beginPath();
+        ctx.moveTo(0,0);
+        ctx.lineTo(x,y);
+        ctx.lineWidth=5;
+        ctx.strokeStyle='red';
+        ctx.stroke();
+        let mouseOnCanv=false
+
+        function drawLine(){
+            if(x<can.width){
+                x=x+30;
+                y=y+30;
+                ctx.lineTo(x,y);
+                ctx.stroke();
+                
+            }
+            else{
+                alert('We Are Done Here');
+                mouseOnCanv=false
+            }
+            
+            
+        }
+        function animate(){
+            if(mouseOnCanv){
+                drawLine();
+                requestAnimationFrame(animate);
+            }
+        }
+
+        can.addEventListener('mouseover', function(){
+            mouseOnCanv = true;
+            console.log('here');
+            animate();
+        });
+        can.addEventListener('mouseout', function(){
+            mouseOnCanv = false;
+        });
+    </script>
+</body>
+
+</html>
