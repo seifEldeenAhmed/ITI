@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation Tracker</title>
+</head>
+<body>
+    <button onclick="hideMe()">hide Me</button>
+    <script>
+        let nav;
+        function getLocation(){
+            nav= navigator.geolocation.watchPosition(tracked,untracked);
+        }
+        function tracked(position){
+            let lat=position.coords.latitude
+            let long=position.coords.longitude
+            //console.log(lat,long);
+            window.open("http://maps.google.com/maps?q=" + lat + ',+' + long,'_blank')
+
+
+        }
+        function untracked(e){
+            console.error('Error getting user location:', e);
+        }
+        
+        function hideMe(){
+            navigator.geolocation.clearWatch(nav)
+            
+        }
+    </script>
+</body>
+</html>

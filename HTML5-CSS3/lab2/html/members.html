@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>members</title>
+    <link rel="stylesheet" href="../css/table.css">
+</head>
+<body>
+    <table onload="buildMeTable()" id="object-table"></table>
+    <button onclick="clearData()" type="button">Delete All Data</button>
+    <script>
+        const table =document.getElementById('object-table')
+        let data=JSON.parse(localStorage.getItem('members'))
+        
+        function buildMeTable(){
+            for (const key in data) {
+            if (Object.hasOwnProperty.call(data, key)) {
+                const element = data[key];
+                console.log(element);
+                let row=document.createElement('tr')
+                let name=document.createElement('td')
+                name.id='name'
+                let age=document.createElement('td')
+                let button=document.createElement('td')
+                let del=document.createElement('button')
+                del.innerHTML='Delete'
+                del.className='del'
+                name.textContent=element.name
+                age.textContent=element.age
+                row.appendChild(name)
+                row.appendChild(age)
+                button.appendChild(del)
+                row.appendChild(button)
+                table.appendChild(row)
+                
+            }
+            }
+            attachLogicToDelete();
+        }
+        buildMeTable();
+        // console.log(delete data['sief']);
+        // console.log(data);
+        
+        function attachLogicToDelete(){
+            let delButtons=document.querySelectorAll('.del')
+            for (let i = 0; i < delButtons.length; i++) {
+                delButtons[i].onclick=function(){
+                    delete data[this.parentNode.parentNode.querySelector('#name').textContent];
+                    localStorage.setItem('members',JSON.stringify(data));
+                    this.parentNode.parentNode.remove()
+                }
+                
+            }
+        }
+        function clearData(){
+            localStorage.removeItem('members');
+        }
+
+    </script>
+</body>
+</html>

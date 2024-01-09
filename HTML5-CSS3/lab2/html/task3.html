@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/form.css">
+</head>
+
+<body>
+    <form id="member-form" onsubmit="submitHandler()">
+        <input id="name" name="name" type="text" pattern="\w{3,16}" required>
+        <input type="number" pattern="[0-90-9]{,2}" name="age" min="15" max="90" required>
+        <button id="save" type="submit">save</button>
+    </form>
+    <button onclick="showMembers()">show members</button>
+
+
+    <script>
+        let members = {}
+        class Member {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+        }
+        const btn = document.getElementById('save')
+        const form = document.getElementById('member-form')
+        function submitHandler() {
+
+            let name = document.getElementById('name');
+            if (name.checkValidity()) {
+                event.preventDefault();
+                let nameInput = document.getElementsByName('name')[0].value
+                let ageInput = Number(document.getElementsByName('age')[0].value);
+                if (!nameInput || !ageInput) {
+                    console.error('Name and age input values are required');
+                    return;
+                }
+
+                const mem = new Member(nameInput, ageInput)
+                members[`${mem.name}`] = mem
+
+                form.reset();
+            }
+
+        }
+
+        function showMembers() {
+            localStorage.setItem('members', JSON.stringify(members))
+            window.open('members.html')
+        }
+
+
+    </script>
+</body>
+
+</html>

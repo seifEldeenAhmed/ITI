@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hard Workers</title>
+</head>
+<body>
+    <button id="sum">Sum</button>
+    <button id="sum2">sum2</button>
+
+        <script>
+            let worker1=new Worker("../js/worker1.js")
+            let worker2=new Worker("../js/worker2.js")
+            let sum=document.getElementById('sum')
+            sum.onclick=function(){
+                console.log('here');
+                worker1.postMessage("")
+            }
+            sum2.onclick=function(){
+                worker2.postMessage("")
+            }
+            worker1.onmessage = function (message) {
+            alert(message.data);
+        }
+            worker2.onmessage = function (message) {
+            alert(message.data);
+        }
+        
+        </script>
+</body>
+</html>
