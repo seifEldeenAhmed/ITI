@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task1 jQuery</title>
+    <style>
+        div img {
+            width: 300px;
+            margin: 10px;
+        }
+
+        div {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+        }
+
+        .carousel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carousel">
+        <img class="img" style="height: 300px;" src="366040997_3182104985266946_6839713277903627889_n.jpg"
+            alt="cat playing dominoes">
+        <button class="stop">Stop Carousel</button>
+
+    </div>
+    <hr>
+    <div class="pics">
+        <div style="display: flex; flex-direction: column;"><img class="pic" src="2093834.jpg" alt="">
+            <p>Before the task
+            </p>
+        </div>
+        <div style="display: flex; flex-direction: column;"><img class="pic" src="366040997_3182104985266946_6839713277903627889_n.jpg" alt="">
+            <p>in middle of the task
+            </p>
+        </div>
+        <div style="display: flex; flex-direction: column;">
+            <img class="pic" src="414687106_328654696724815_9053861236423322776_n.jpg" alt="">
+            <p>after the task
+                
+            </p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous">
+
+        </script>
+    <script>
+
+        let srcArr = ['366040997_3182104985266946_6839713277903627889_n.jpg', '414687106_328654696724815_9053861236423322776_n.jpg', '2093834.jpg']
+        let currentPic = 0;
+        $(".img").css({ 'width': '500px' });
+        function update() {
+            $(".img").fadeTo(2000, 0, function () {
+                currentPic = (currentPic + 1) % srcArr.length;
+                $(".img").attr('src', srcArr[currentPic]);
+            }).fadeTo(2000, 1);
+        }
+        $(".img").on('load', update)
+
+        if ($(".img")[0].complete) {
+            $(".img").trigger('load')
+        }
+        $(".stop").on("click", () => {
+            $("img").off("load");
+        });
+
+        //_________________________________________________________________//
+        $('.pic').next().slideUp(1)
+        $('.pic').on('click', function(){
+            $(this).next().slideToggle(200)
+        })
+        
+    </script>
+
+</body>
+
+</html>
