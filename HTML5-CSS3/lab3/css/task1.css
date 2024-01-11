@@ -1,0 +1,72 @@
+
+@font-face {
+    font-family: cairo;
+    src: url('/assets/Cairo/Cairo-VariableFont_slnt\,wght.ttf');
+}
+img{
+    height: 300px;
+    width: 300px;
+    
+}
+
+img:hover{
+    animation:  picture 2.5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes picture {
+    0% {
+        opacity: 100%;
+      }
+    100% {
+        opacity: 0%;
+      }
+    
+}
+
+#text{
+    font-family: cairo,Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    position: relative;
+    bottom: 50px;
+    left: 50px;
+    color: chocolate;
+    font-size: 16px;
+    font-weight: bold;
+}
+/* div{
+    height: 1000px;
+} */
+
+.pls{
+    border: 3px solid salmon;
+    border-radius: 1px;
+    width: 300px;
+    
+}
+
+.pls:hover{
+    animation: bgcolor 3s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+@keyframes bgcolor {
+    0%{
+        background: cyan;
+    }
+    5%{
+        background: rgb(0, 140, 255);
+    }
+    15%{
+        background: rgb(0, 47, 255);
+    }
+    25%{
+        background: rgb(38, 0, 255);
+    }
+    35%{
+        background: rgb(174, 0, 255);
+    }
+    100%{
+        background: rgb(255, 0, 76);
+    }
+}

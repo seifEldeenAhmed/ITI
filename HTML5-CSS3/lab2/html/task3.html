@@ -9,12 +9,12 @@
 </head>
 
 <body>
-    <form id="member-form" onsubmit="submitHandler()">
+    <form id="member-form" class="my-form" onsubmit="submitHandler()">
         <input id="name" name="name" type="text" pattern="\w{3,16}" required>
         <input type="number" pattern="[0-90-9]{,2}" name="age" min="15" max="90" required>
         <button id="save" type="submit">save</button>
     </form>
-    <button onclick="showMembers()">show members</button>
+    <button class="show" onclick="showMembers()">show members</button>
 
 
     <script>
