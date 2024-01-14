@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EQuery</title>
+    <script src="./npm/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./npm/node_modules/jquery-ui/dist/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="jQ.css">
+</head>
+<body>
+    <header>
+        <h1>EQuery</h1>
+        <div class="search-bar">
+            <input type="text" class="search-input" id="searchById" placeholder="Search by ID">
+            <button id="search">Search</button>
+        </div>
+    </header>
+    <div class="container">
+    </div>
+    <script>
+
+        $.ajax({
+            url:'https://dummyjson.com/products',
+            success:function(res){
+                    // console.log(res.products)
+                    for (let i = 0; i < res.products.length; i++) {
+                        $('.container').append('<a><div class="product-card"><img/><h3 class="title"></h3><p class="desc"></p></div></a>')
+                        previewData(res.products[i]);
+                    }
+                },
+            error:function(e){
+                throw(e)
+            }
+        })
+        function previewData(product){
+            $('.container a .product-card img:last').attr('src',product.images[0])
+            $('.container a .product-card .title:last').text(product.title)
+            $('.product-card:last .desc').text(product.description);
+        }
+
+        $('#search').on('click',function(){
+            $.ajax({
+            url:'https://dummyjson.com/products/'+$('#searchById').val(),
+            success:function(res){
+                    console.log(res);
+                    $('.container').html('<a><div class="product-card"><img/><h3 class="title"></h3><span class="price"></span><p class="desc"></p></div></a>');
+                    previewData(res);
+
+                },
+            error:function(e){
+                throw(e)
+            }
+        })
+        })
+
+    </script>
+</body>
+</html>
