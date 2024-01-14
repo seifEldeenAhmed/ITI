@@ -1,6 +1,5 @@
 let oragnizationData=document.getElementById('organization');
-const data=JSON.parse(oragnizationData.textContent.split('">')[1])
-const header=oragnizationData.textContent.split('">')[0]
+let data=JSON.parse(oragnizationData.innerHTML);
 
 navigator.geolocation.getCurrentPosition(tracked)
 
@@ -12,7 +11,7 @@ function tracked(position){
     data.geo.latitude=latitude;
     data.geo.longitude=longitude;
     console.log(latitude, longitude);
-    oragnizationData.textContent=header+'">'+JSON.stringify(data)
+    oragnizationData.textContent=JSON.stringify(data)
     console.log(oragnizationData.textContent);
 }
 
