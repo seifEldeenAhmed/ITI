@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flexBox</title>
+    <style>
+        .header{
+            display: flex;
+            justify-content: space-around;
+            background: rgb(214, 214, 214);
+        }
+        .header>p{
+            padding: 10px;
+            margin: 10px;
+            font-size: 20px;
+        }
+        .header>p:hover{
+            background: white;
+        }
+        .container{
+            display: flex;
+
+        }
+        .article{
+            margin:5px;
+            /* height: 200px; */
+            border: 3px solid salmon;
+            width: 50%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+        .article>p{
+            flex-grow: 1;
+        }
+        .footer{
+            background-color: rgb(214, 214, 214); 
+        }
+
+        .ccontainer{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: bisque;
+            height: 300px;
+        }
+        .center{
+            background: #995555;
+        }
+        @media  (max-width:500px) {
+            body{
+                background-color: aquamarine;
+            }
+            .header{
+                display: flex;
+                flex-direction:column;
+            }
+            .container{
+                display: flex;
+                flex-direction: column;
+            }
+            .article{
+                margin: 0px;
+                margin-bottom: 6px;
+                
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <p>Home</p>
+        <p>About</p>
+        <p>Services</p>
+        <p>Contact</p>
+    </div>
+    <div class="container">
+        <div class="article">
+            <p>This is a flex item</p>
+            <div class="footer">Footer</div>
+        </div>
+        <div class="article">
+            <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+            Natus nam quasi dolores cumque, 
+            ea odit corrupti architecto voluptas repudiandae animi iusto corporis, 
+            dolorum vel accusantium cupiditate! Ipsum optio illum eaque!
+        </p>
+        <div class="footer">Footer</div>
+    </div>
+    </div>
+    <hr>
+    <div class="ccontainer">
+        <div class="center">centered content</div>
+    </div>
+</body>
+</html>
