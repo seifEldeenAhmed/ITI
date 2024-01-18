@@ -1,6 +1,7 @@
 <pre>
 <?php
 // First way Ps:You dont need pre tags here
+// but if You use \n instead you need to use them. 
 //_____________________________________
 // foreach ($_SERVER as $key => $value) {
 //     echo "$key=>$value"."<br>";
