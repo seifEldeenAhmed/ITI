@@ -1,5 +1,6 @@
 <pre>
 <?php
+echo nl2br("Seif loves music\n Seif says sorry for the misconception\n Thanks for your guidance ❤\n");
 // First way Ps:You dont need pre tags here
 // but if You use \n instead you need to use them. 
 //_____________________________________
