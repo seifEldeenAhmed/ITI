@@ -5,74 +5,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form</title>
+    <style>
+        
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    </style>
 </head>
-<?php
-$missing_name = $missing_email = $missing_gender= $missing_agree = '';
-if (isset($_POST['submit'])) {
-    print_r($_POST);
-    if (empty($_POST['fname'])) {
-        $missing_name = 'The Name is required';
-    }
-    if (empty($_POST['email'])) {
-        $missing_email = 'The Email is required';
-    }
-    if (empty($_POST['gender'])) {
-        $missing_gender = 'The Gender is required';
-    }
-    if(!isset($_POST['agree'])){
-        $missing_agree = 'The Agreement is required';
-    }
-}
-?>
 
 <body>
-    <form action='#' method="post">
-        <span style="color:red">* required field</span><br>
-        <label for="fname">First name:</label><br>
-        <input type="text" name="fname" value="<?php echo !empty($_POST['fname'])? $_POST['fname']:''  ?>"><span name='span' style="color: red;">* <?php echo $missing_name ?></span><br>
-        <label for="email">Email:</label><br>
-        <input type="text" id="email" name="email" value="<?php echo !empty($_POST['email'])? $_POST['email']:''  ?>"><span name='span' style="color: red;">* <?php echo $missing_email ?></span><br>
-        <label for="groupNo">group #</label><br>
-        <input type="number" id="groupNo" name="groupNo" value="<?php echo !empty($_POST['groupNo'])? $_POST['groupNo']:''  ?>"><br>
-        <label for="class detail">class details</label><br>
-        <textarea name="class_detail"><?php echo !empty($_POST['class_detail'])? $_POST['class_detail']:''  ?></textarea><br>
-        <label for="email">Gender:</label><br>
-        <input type="radio" name="gender" value="female" <?php if(isset($_POST['gender'])&&$_POST['gender']=='female') echo 'checked' ?>>Female
-        <input type="radio" name="gender" value="male" <?php if(isset($_POST['gender'])&&$_POST['gender']=='male') echo 'checked' ?>>Male
-        <span name='span' style="color: red;">* <?php echo $missing_gender ?></span><br>
-        <label for="courses">Selected Courses:</label>
-        <select name="courses[]" id="courses" multiple>
-            <option value="PHP">PHP</option>
-            <option value="MySQL">MySQL</option>
-            <option value="HTML">HTML</option>
-            <option value=".NET">.NET</option>
-        </select><br>
-        <label for="agree">agree for the following terms</label>
-        <input type="checkbox" name="agree"><span name='span' style="color: red;">* <?php echo $missing_agree ?></span><br>
-        <input type="submit" value="submit" name="submit">
-
-    </form>
-
+    
     <?php
-    if (!empty($_POST['fname'])) {
-        echo "Your input name is " . $_POST['fname'] . "<br>";
+    if (!empty($_POST['fname'])&&!empty($_POST['email'])
+    &&!empty($_POST['gender'])&&isset($_POST['agree'])) {
+        require_once 'config.php';
+       $u_name=$_POST['fname'];
+       $u_email=$_POST['email'];
+       $u_gender=$_POST['gender'];
+       $u_agree=1;
+        
+       $insert_to_table="INSERT INTO `users`(`user_name`, `user_email`,
+       `user_gender`,`user_agree`) 
+       VALUES('$u_name','$u_email','$u_gender','$u_agree')
+       ";
+       if (!mysqli_query($conn, $insert_to_table)) {
+        
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+      }
+      else{
+        header("location: ". $_SERVER['PHP_SELF']);
     }
-    if (!empty($_POST['email'])) {
-        echo "Your input email is " . $_POST['email'] . "<br>";
     }
-    if (!empty($_POST['class_detail'])) {
-        echo "Your input class_detail is" . $_POST['class_detail'] . "<br>";
-    }
-    if (!empty($_POST['gender'])) {
-        echo "Your input gender is " . $_POST['gender'] . "<br>";
-    }
-    if (!empty($_POST['courses'])) {
-        echo "Your Courses are ";
-        foreach ($_POST['courses'] as $selectedOption){
-            echo $selectedOption . " & ";
+    // unset($_POST);
+    echo '<a href="form.html"><button>Add new user</button></a>';
+    include_once 'config.php';
+    $sql = "SELECT * FROM users";
+    $result = mysqli_query($conn, $sql);
+    echo '<table>';
+    echo '<tr>';
+    echo '<th>#</th>';
+    echo '<th>Name</th>';
+    echo '<th>Email</th>';
+    echo '<th>Gender</th>';
+    echo '<th>Acceptance</th>';
+    echo '<th>Action</th>';
+    echo '</tr>';
+    if (mysqli_num_rows($result) > 0) {
+        // output data of each row
+        while($row = mysqli_fetch_assoc($result)) {
+          echo '<tr>';
+          foreach ($row as $key => $value) {
+            echo '<td>';
+            echo "$row[$key]";
+            echo '</td>';
+          }
+          echo '</tr>'; 
         }
-        echo "<br>";
     }
+    echo '</table>';
+    include_once 'term_session.php';
+
+    
     ?>
 </body>
 

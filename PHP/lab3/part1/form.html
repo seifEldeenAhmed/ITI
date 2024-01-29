@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    
+</head>
+<body>
+    <form action='form.php' method="post" style="padding: 10px;">
+        <span style="color:red">* required field</span><br>
+        <label for="fname">First name:</label><br>
+        <input type="text" name="fname" required><span name='span' style="color: red;" >* </span><br>
+        <label for="email">Email:</label><br>
+        <input type="text" id="email" name="email" required><span name='span' style="color: red;" >* </span><br>
+        <label for="groupNo">group #</label><br>
+        <input type="number" id="groupNo" name="groupNo"><br>
+        <label for="class detail">class details</label><br>
+        <textarea name="class_detail"></textarea><br>
+        <label for="email">Gender:</label><br>
+        <input type="radio" name="gender" value="female">Female
+        <input type="radio" name="gender" value="male" >Male
+        <span name='span' style="color: red;">* </span><br>
+        <label for="courses">Selected Courses:</label>
+        <select name="courses[]" id="courses" multiple>
+            <option value="PHP">PHP</option>
+            <option value="MySQL">MySQL</option>
+            <option value="HTML">HTML</option>
+            <option value=".NET">.NET</option>
+        </select><br>
+        <label for="agree">agree for the following terms</label>
+        <input type="checkbox" name="agree" required><span name='span' style="color: red;" >* </span>
+        <br>
+        <input type="submit" value="submit" name="submit">
+    </form>
+    <!-- <a href="table.php"><button class="redirect">Show records</button></a> -->
+
+</body>
+</html>
