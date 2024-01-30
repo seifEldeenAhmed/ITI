@@ -56,17 +56,6 @@
         }
         ?>
         <?php
-        if(isset($_POST['delete'])){
-            $id_to_delete=$_POST['id_to_delete'];
-            $sql = "DELETE FROM pizzas WHERE id = $id_to_delete";
-            if(mysqli_query($conn,$sql)){
-                header("location:form.php");
-            }else{
-                echo 'this pizza is not found'. mysqli_error($conn);
-        
-            }
-            
-        }
         ?>
         <?php if ($user) { ?>
             <div class="card">
