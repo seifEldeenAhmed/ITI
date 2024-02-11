@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        input[type="text"],
+        input[type="button"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="button"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            border: 2px solid #ddd;
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        button {
+            padding: 8px 12px;
+            border: none;
+            background-color: #f44336;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #d32f2f;
+        }
+
+        form {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+<div style="padding-left: '20px';">
+    Model:<input type="text" name="model" id="model"><br>
+    Lisence:<input type="text" name="lisence" id="lisence"><br>
+    <input type="button" value="Add" onclick="addCar()"><br>
+
+</div>
+    <div id="data"></div>
+
+    <script>
+        async function addCar(){
+            const model=document.getElementById('model').value
+            const lisence=document.getElementById('lisence').value
+            const body={
+                model:model, 
+                lisence:lisence
+            }
+            await fetch("http://localhost:8080/store",{
+                method:"POST",
+                headers:{
+                    "content-type":"application/json"
+                },
+                body:JSON.stringify(body)
+            })
+            showAll();
+        }
+        async function showAll(){
+            let res=await fetch('http://localhost:8080/garage');
+            let resBody=await res.json();
+            let garage= resBody.data;
+            let html = "";
+            let garageHtml = garage.map(car => `<tr>
+                <td>${car.id}</td>
+                <td>${car.model}</td>
+                <td>${car.liscence}</td>
+                <td><button onclick="deleteCar('${car.id}')">Delete</button></td>
+                <td><form action='/car'>
+                    <input type='hidden' name='id' value='${car.id}'>
+                    <input type='submit' value='show'></form></td>
+                </tr>`)
+            html = "<table><tr><th>id</th><th>model</th><th>lisence</th><th>Action</th><th></th></tr>"+garageHtml.join("\r\n")+"</table>"
+
+            document.getElementById("data").innerHTML=html;
+        }
+
+        async function deleteCar(id){
+            let res = await fetch("http://localhost:8080/delete/"+id);
+            let resBody = await res.json();
+
+            alert(resBody.msg);
+            showAll();
+        }
+        
+        
+    </script>
+</body>
+</html>
