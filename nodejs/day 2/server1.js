@@ -26,7 +26,6 @@ class Student{
     }
 }
 app.post('/store',async function(req,res){
-    const id= ++lastIndex
     
     if (req.body.password.length<8) {
         let msg='registeration failed need 8 chars of password'
@@ -35,6 +34,7 @@ app.post('/store',async function(req,res){
         try {
             const salt= await bcrypt.genSalt(10);
             const hashedPassword= await bcrypt.hash(req.body.password,salt);
+            const id= ++lastIndex
             const student= new Student(id,req.body.name, req.body.email, hashedPassword)
             console.log(student);
             students.push(student)
