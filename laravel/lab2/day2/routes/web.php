@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 
 /*
@@ -23,3 +24,5 @@ Route::resource('users', UserController::class);
 Route::get('home',function(){
     return view('users.home');
 })->name('users.home');
+
+Route::resource('posts',PostController::class);
