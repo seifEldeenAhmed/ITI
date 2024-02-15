@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Str;
+
 class PostController extends Controller
 {
     /**
@@ -13,7 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts=Post::all();
+        $posts = Post::paginate(15);
         foreach($posts as $post){
             $user_name=User::find($post->user_id)->name;
             $post->user_id=$user_name;
@@ -102,7 +103,6 @@ class PostController extends Controller
     public function destroy(string $id)
     {
         Post::find($id)->delete();
-        $posts=Post::all();
-        return view('posts.index',['posts'=>$posts]);
+        return redirect()->route('posts.index');
     }
 }

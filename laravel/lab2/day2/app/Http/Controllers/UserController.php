@@ -3,17 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\User; 
+use App\Models\Post; 
+
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {   
-        $users=User::all();
-        return view('users.index',['users'=>$users]);
+    public function index(){
+
+        $users = User::paginate(15);
+        return view('users.index', [
+            'users' => $users,
+        ]);
     }
 
     /**
@@ -41,8 +45,13 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
+        $posts=Post::where('user_id',$id)->simplePaginate(2);
         $user=User::find($id);
-        return view('users.profile',['user'=>$user]);
+        return view('users.profile',
+        [
+            'user'=>$user,
+            'posts'=>$posts
+        ]);
     }
 
     /**

@@ -4,8 +4,10 @@
 @section('title','Posts Index')
 
 @section('content')
+
 <table class="table table-striped">
     <thead>
+      {{ $posts->links() }}
       <tr>
         <th scope="col">#</th>
         <th scope="col">Title</th>

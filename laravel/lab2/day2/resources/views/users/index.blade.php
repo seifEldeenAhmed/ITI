@@ -6,6 +6,7 @@
 @section('content')
 <table class="table table-striped">
     <thead>
+      {{ $users->links() }}
       <tr>
         <th scope="col">#</th>
         <th scope="col">First</th>

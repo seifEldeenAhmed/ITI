@@ -13,11 +13,9 @@
         <h4 class="card-title">{{$post->user_id}}</h4>
         <h4 class="card-title">{{$post->slug}}</h4>
         <h4 class="card-title">{{$post->created_at}}</h4>
-        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam blanditiis dicta tenetur, dolore ex at nobis accusantium necessitatibus
-          fuga dolores sit molestias, 
-          ipsa dolor, temporibus cum omnis harum sint qui.
+        <p class="card-text">
           {{$post->body}}.
-          is an architect and engineer</p>
+          </p>
       </div>
     </div>
     <br>
