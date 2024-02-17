@@ -17,10 +17,11 @@ class Post extends Model
         'user_id',
         'enabled',
         'slug',
+        'image'
     ];
     
 
     public function user (){
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 }

@@ -5,6 +5,7 @@
 
 @section('content')
 
+{{session()->get('msg')}}
 <table class="table table-striped">
     <thead>
       {{ $posts->links() }}
@@ -14,6 +15,7 @@
         <th scope="col">slug</th>
         <th scope="col">Created By</th>
         <th scope="col">Created At</th>
+        <th scope="col">Image</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -25,6 +27,11 @@
             <td>{{$post->slug}}</td>
             <td>{{$post->user_id}}</td>
             <td>{{$post->created_at}}</td>
+            @if ($post->image)
+            <td><img style="max-width: 100px" src="/storage/{{ $post->image }}" alt="Post Image"></td>
+            @else
+            <td>No Image Preview</td>
+            @endif
             <td>
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                     <form action="{{route('posts.destroy',['post'=> $post->id])}}" method="post">

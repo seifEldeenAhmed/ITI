@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\FileValidate;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Str;
-
+use App\Events\PostCounter;
+use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     /**
@@ -15,10 +17,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::paginate(15);
-        foreach($posts as $post){
-            $user_name=User::find($post->user_id)->name;
-            $post->user_id=$user_name;
-        }
+        
         return view('posts.index',['posts'=>$posts]);
         
 
@@ -29,8 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $users=User::all();
-        return view('posts.create',['users'=>$users]);
+        return view('posts.create');
     }
 
     /**
@@ -38,23 +36,29 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $imagePath=null;
+        if ($request->hasFile('file')&& $request->file('file')->isValid()) {
+            $path = $request->file->store('images','public');
+            $imagePath= $path;
+        }
         $title=$request->input('title');
-        $user=$request->input('user_id');
         $body=$request->input('body');
         if($request->input('enabled')=='on'){
             $enabled=1;
         }else{
             $enabled=0;
         }
-        Post::create(
-            [
-                'title'=>$title,
-                'user_id'=>$user,
-                'enabled'=>$enabled,
-                'body'=>$body,
-                'slug'=>Str::slug($title),
-            ]
-        );
+        $data=[
+            'title'=>$title,
+            'body'=>$body,
+            'enabled'=>$enabled,
+            'slug'=>Str::slug($title),
+            'image'=>$imagePath
+        ];  
+        
+        $user=Auth::user();
+        $post=$user->posts()->create($data);
+        event(new PostCounter($post));
         return redirect()->route('posts.index');
     }
 
@@ -73,9 +77,14 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        $users=User::all();
         $post=Post::find($id);
-        return view('posts.edit',['post'=>$post, 'users'=>$users]);
+        if (Auth::id()==$post->user->id) {
+            return view('posts.edit',['post'=>$post]);
+        }
+        else{
+            
+            return redirect()->route('posts.index')->with(['msg'=>'Access Denied']);
+        }
     }
 
     /**
@@ -87,7 +96,7 @@ class PostController extends Controller
         Post::find($id)->update(
             [
                 'title'=>$request->input('title'),
-                'user_id'=>$request->input('user_id'),
+                'user_id'=>Auth::id(),
                 'enabled'=>$request->input('enabled')=='on'?1:0,
                 'body'=>$request->input('body'),
                 'slug'=>Str::slug($request->input('title'))
@@ -102,7 +111,13 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        Post::find($id)->delete();
-        return redirect()->route('posts.index');
+        $post=Post::find($id);
+        if (Auth::id()==$post->user_id) {
+            # code...
+            Post::find($id)->delete();
+            return redirect()->route('posts.index');
+        }else{
+            return redirect()->route('posts.index')->with(['msg'=>'Access Denied']);
+        }
     }
 }

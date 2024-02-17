@@ -4,6 +4,7 @@
 @section('title','Index')
 
 @section('content')
+
 <table class="table table-striped">
     <thead>
       {{ $users->links() }}
@@ -11,6 +12,7 @@
         <th scope="col">#</th>
         <th scope="col">First</th>
         <th scope="col">Email</th>
+        <th scope="col">Post count</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -20,6 +22,7 @@
             <td>{{$user->id}}</td>
             <td>{{$user->name}}</td>
             <td>{{$user->email}}</td>
+            <td>{{$user->posts_count}}</td>
             <td>
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                     <form action="{{route('users.destroy',['user'=> $user->id])}}" method="post">
