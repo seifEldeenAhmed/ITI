@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">Seif's Blog</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -17,6 +17,15 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item {{URL()->current()=='http://127.0.0.1:8000/users/create'? 'active':''}}" href="{{route('users.create')}}">User Add</a></li>
             <li><a class="dropdown-item {{URL()->current()=='http://127.0.0.1:8000/users'? 'active':''}}" href="{{route('users.index')}}">User List</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle {{URL()->current()=='http://127.0.0.1:8000/posts/create'||URL()->current()=='http://127.0.0.1:8000/posts'? 'active':''}}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Post
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item {{URL()->current()=='http://127.0.0.1:8000/posts/create'? 'active':''}}" href="{{route('posts.create')}}">Post Add</a></li>
+            <li><a class="dropdown-item {{URL()->current()=='http://127.0.0.1:8000/posts'? 'active':''}}" href="{{route('posts.index')}}">Post List</a></li>
           </ul>
         </li>
       </ul>

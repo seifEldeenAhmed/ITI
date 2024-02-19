@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use App\Models\User;
 return new class extends Migration
 {
     /**
@@ -11,7 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::create('social_users', function (Blueprint $table) {
+            $table->id();
+            $table->string('provider');
+            $table->string('provider_user_id');
+            $table->text('token');
+            $table->foreignIdFor(User::class)->nullable()->constrained();
             $table->timestamps();
         });
     }
@@ -21,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('table_users', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('social_users');
     }
 };
